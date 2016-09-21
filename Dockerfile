@@ -4,5 +4,6 @@ RUN apk add -U curl ; \
         tar zxvf kcptun-linux-amd64-20160919.tar.gz; \
         rm *.gz; \
         rm client*; \
-        mv server_linux_amd64 /bin/server;
+        mv server_linux_amd64 /bin/server; \
+        apk del curl ; 
 CMD ["server"]
