@@ -1,11 +1,8 @@
 FROM alpine
-RUN apk update ; \
-        apk add git go;\
-        export GOPATH=/opt/go; \
-        go get -u -v github.com/xtaci/kcptun/server; \
-        mv /opt/go/bin/server /bin/server;\
-        apk del openssl ca-certificates libssh2 curl expat pcre git go;\
-        rm -rf /opt/go ;\
-        rm -rf /usr/lib/go;
-
+RUN apk add -U curl ; \
+        curl -L -O https://github.com/xtaci/kcptun/releases/download/v20160919/kcptun-linux-amd64-20160919.tar.gz; \
+        tar zxvf kcptun-linux-amd64-20160919.tar.gz; \
+        rm *.gz; \
+        rm client*; \
+        mv server_linux_amd64 /bin/server;
 CMD ["server"]
